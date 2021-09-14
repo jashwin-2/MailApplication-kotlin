@@ -15,6 +15,7 @@ class MailId(id : String) {
                 }
                 else{
                     throw InvalidMailIdException()
+                println("hiiii")
             }
     }
 

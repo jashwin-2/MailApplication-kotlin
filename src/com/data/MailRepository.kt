@@ -2,6 +2,7 @@ package com.data
 
 import  com.data.model.Account
 import com.data.model.Mail
+import com.data.model.MailId
 
 abstract class MailRepository(val domainName: String) {
 
@@ -27,15 +28,21 @@ abstract class MailRepository(val domainName: String) {
             var receiverRepository: MailRepository? = RepositoryDispatcher getRepository receiverMailId.domain
 
             if (receiverRepository != null) {
-                receiverRepository receiveMail receiverMail
+                receiverRepository receiverMail receiverMail
                 sender!! addInMail mail
             }
 
         }
     }
 
-    infix fun receiveMail(receiverMail: Mail) {
+    infix fun receiverMail(receiverMail: Mail) {
         accounts[receiverMail.receiver.id]!! addInMail(receiverMail)
+    }
+
+    public fun isValid(mailId : MailId): Boolean{
+        val domainName: String = mailId.domain
+        return if (domainName == this.domainName) contains(mailId.id) else (RepositoryDispatcher.getRepository(domainName)
+            ?.contains(mailId.id) == true)
     }
 
 }

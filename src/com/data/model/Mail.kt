@@ -3,7 +3,7 @@ package com.data.model
 data class Mail(
     val sender: MailId,
     val receiver: MailId,
-    val type: Type,
+    var type: Type,
     val subject: String = " ",
     val body: String = " ",
     val attachment: String = " "
