@@ -9,8 +9,8 @@ import com.view.MenuItem
 
 fun main() {
 
-   RepositoryDispatcher addInRepositories GmailRepository
-    RepositoryDispatcher addInRepositories ZohoRepository
+    RepositoryDispatcher.addInRepositories(GmailRepository)
+    RepositoryDispatcher.addInRepositories(ZohoRepository)
 
 
     while (true) {

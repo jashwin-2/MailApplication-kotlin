@@ -7,4 +7,6 @@ enum class MenuItem(val index: Int,val text: String) {
     RECEIVED(4,"Show Received Mails"),
     DRAFT(5,"Draft Mails"),
     LOGOUT(6,"Log Out");
+
 }
+infix fun Int.values(items : Array<MenuItem>): MenuItem? = items.find { it.index==this }
