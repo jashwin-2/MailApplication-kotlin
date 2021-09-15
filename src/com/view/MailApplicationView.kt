@@ -8,6 +8,7 @@ import com.data.model.MailId
 import com.exception.InvalidMailIdException
 import com.extensions.isValidMailId
 import com.extensions.values
+import java.awt.Menu
 
 
 class MailApplicationView(private val repository: MailRepository, private val name: String ) {
@@ -37,7 +38,7 @@ class MailApplicationView(private val repository: MailRepository, private val na
 
     private fun createAccount() {
         println("Enter your name ")
-        val name : String? = readLine()
+        val name : String = readLine()!!
         val customerMailId : MailId
         var mobileNo : Int = 0
 
@@ -53,6 +54,7 @@ class MailApplicationView(private val repository: MailRepository, private val na
                 }
             println("Enter the mail id you want without domain name:")
             var mailId = readLine() ?:  continue
+
             if (mailId.contains('@')) {
                 println("@ is not allowed ")
                 continue
@@ -60,7 +62,7 @@ class MailApplicationView(private val repository: MailRepository, private val na
             mailId+="@"+repository.domainName
             if(!mailId.isValidMailId())
                 println("Entered mail id is invalid only use Alphabets,Numbers, . and _ ")
-            if(repository.contains(mailId)) {
+            if(repository contains mailId) {
                 println("Mail id $mailId is already taken enter a different one")
                 continue
             }
@@ -68,8 +70,8 @@ class MailApplicationView(private val repository: MailRepository, private val na
             break
         }
         println("Enter the password :")
-        val password = readLine()
-        repository.addAccount(Account(name!!, customerMailId, password!!,mobileNo))
+        val password = readLine()!!
+        repository addAccount Account(name, customerMailId, password,mobileNo)
         println("Account created Successfully ....!\nMail Id : $customerMailId \n Password : $password")
         logInView()
     }
@@ -85,13 +87,13 @@ class MailApplicationView(private val repository: MailRepository, private val na
             return
         }
 
-        if(!repository.contains(mailId!!.id)){
+        if(!(repository contains mailId!!.id)){
             onErrorOccur(ErrorCodes.ACCOUNT_NOT_FOUND)
             logInView()
         }
         else{
             println("Enter your password ")
-            if ((repository.getAccount(mailId.id)?.password ) .equals(readLine())){
+            if ((repository.getAccount(mailId.id)?.password) .equals(readLine())){
                 this.account= repository.getAccount(mailId.id)!!
                 showMenuItems()
             }
@@ -107,14 +109,16 @@ class MailApplicationView(private val repository: MailRepository, private val na
     {
         println("************ Menu *********")
         item.forEach { println("${it.index} --> ${it.text}") }
-        var input : Int? = 0
+        var input : Int = 0
+        var selectedItem : MenuItem? = null
         try {
-        input = readLine()?.toInt()
+            input = readLine()?.toInt() ?: 0
+            selectedItem = input values item
+            if (selectedItem == null) throw NumberFormatException()
         }catch (ex : NumberFormatException){
-
+            println("Invalid input ")
         }
-        if (input != null)
-            onMenuItemSelected (input values item)
+        onMenuItemSelected (selectedItem)
     }
 
     private fun onMenuItemSelected(menuItem: MenuItem?) {
@@ -177,6 +181,7 @@ class MailApplicationView(private val repository: MailRepository, private val na
         println("From : ${mail.sender}   \tTo :${mail.receiver}")
         println("Subject : ${mail.subject}\nBody : ${mail.body}\nAttachment : ${mail.attachment}")
         print("Enter your choice \n 0--> Back \t1-->Reply\t2-->Delete Mail\t")
+
         if (mail.type == Mail.Type.DRAFT) println("3--> Send Mail") else println()
         try {
             when (readLine()?.toInt()) {
@@ -209,13 +214,13 @@ class MailApplicationView(private val repository: MailRepository, private val na
             println("Enter receivers Mail Id ")
             try{
                 receiverMailId = MailId(readLine().toString())
-                if (RepositoryDispatcher.getRepository(receiverMailId.domain) == null) {
+                if (RepositoryDispatcher getRepository (receiverMailId.domain) == null) {
                     onErrorOccur(ErrorCodes.DOMAIN_NOT_FOUND)
                     receiverMailId=null
                     composeMail(receiverMailId)
                 }
 
-                else if (!repository.isValid(receiverMailId)) {
+                else if (!(repository isValid receiverMailId)) {
                     onErrorOccur(ErrorCodes.ACCOUNT_NOT_FOUND)
                     receiverMailId=null
                     composeMail(receiverMailId)
@@ -227,7 +232,6 @@ class MailApplicationView(private val repository: MailRepository, private val na
             }
         }
         if (receiverMailId == null) return
-        println(receiverMailId)
         println("************* COMPOSE *************\nFrom : 	${account.mailId}	 To: $receiverMailId")
         print("Subject : \t")
         val subject: String = readLine().toString()

@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="756f12c5-b6c2-404b-8e5e-41eb7b0d98b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/view/ErrorCodes.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MailApplication/com/MainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MailApplication/com/MainKt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MailApplication/com/view/MailApplicationView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MailApplication/com/view/MailApplicationView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/data/MailRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/data/MailRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/data/ZohoRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/data/ZohoRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/data/model/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/data/model/Account.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/data/model/Mail.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/data/model/Mail.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/data/model/MailId.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/data/model/MailId.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/view/MailApplicationView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/view/MailApplicationView.kt" afterDir="false" />
-    </list>
+    <list default="true" id="756f12c5-b6c2-404b-8e5e-41eb7b0d98b6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,5 +81,9 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/MailApplication$MainKt.ic" NAME="MainKt Coverage Results" MODIFIED="1631697254217" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

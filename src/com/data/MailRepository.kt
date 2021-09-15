@@ -6,10 +6,12 @@ import com.data.model.MailId
 
 abstract class MailRepository(val domainName: String) {
 
-    var accounts : MutableMap<String,Account> = mutableMapOf()
+    private var accounts : MutableMap<String,Account> = mutableMapOf()
 
-    fun contains(id : String) = accounts.containsKey(id)
+    infix fun contains(id : String) = accounts.containsKey(id)
+
     infix fun getAccount(id : String) = accounts[id]
+
     fun Authenticate(id : String,password : String) : Boolean {
         return accounts[id]?.password == password
     }
@@ -17,29 +19,30 @@ abstract class MailRepository(val domainName: String) {
 
     infix fun sendMail(mail : Mail)
     {
-        var receiverMailId = mail.receiver
-        var sender = accounts[mail.sender.id]
+        val receiverMailId = mail.receiver
+        val sender : Account = accounts[mail.sender.id]!!
         val receiverMail : Mail = mail.copy(type = Mail.Type.RECEIVED)
+
         if(domainName == receiverMailId.domain) {
-            sender!! addInMail mail
+            sender addInMail mail
             accounts[receiverMailId.id]!! addInMail(receiverMail)
         }
         else{
-            var receiverRepository: MailRepository? = RepositoryDispatcher getRepository receiverMailId.domain
+            val receiverRepository: MailRepository? = RepositoryDispatcher getRepository receiverMailId.domain
 
             if (receiverRepository != null) {
-                receiverRepository receiverMail receiverMail
-                sender!! addInMail mail
+                receiverRepository receive receiverMail
+                sender addInMail mail
             }
 
         }
     }
 
-    infix fun receiverMail(receiverMail: Mail) {
-        accounts[receiverMail.receiver.id]!! addInMail(receiverMail)
+    private infix fun receive(receiverMail: Mail) {
+        accounts[receiverMail.receiver.id]!! addInMail receiverMail
     }
 
-    public fun isValid(mailId : MailId): Boolean{
+    infix fun isValid(mailId : MailId): Boolean{
         val domainName: String = mailId.domain
         return if (domainName == this.domainName) contains(mailId.id) else (RepositoryDispatcher.getRepository(domainName)
             ?.contains(mailId.id) == true)

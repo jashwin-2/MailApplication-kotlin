@@ -15,12 +15,11 @@ class MailId(id : String) {
                 }
                 else{
                     throw InvalidMailIdException()
-                println("hiiii")
             }
     }
 
     private fun setFields() {
-        var strings : List<String> = id.split("@")
+        val strings : List<String> = id.split("@")
         name = strings[0].split("[0-9]")[0]
         domain = strings[1]
     }
