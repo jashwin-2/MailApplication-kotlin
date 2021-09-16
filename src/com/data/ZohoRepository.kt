@@ -1,4 +1,6 @@
-import com.data.MailRepository
+package com.data
+
+
 import com.data.model.Account
 import com.data.model.MailId
 

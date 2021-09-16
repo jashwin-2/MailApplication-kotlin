@@ -1,11 +1,10 @@
 package com
 
 
-import ZohoRepository
+import com.data.ZohoRepository
 import com.data.GmailRepository
 import com.data.RepositoryDispatcher
 import com.view.MailApplicationView
-import com.view.MenuItem
 
 fun main() {
 

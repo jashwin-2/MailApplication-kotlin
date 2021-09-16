@@ -68,8 +68,13 @@ class MailApplicationView(private val repository: MailRepository, private val na
             customerMailId = MailId(mailId)
             break
         }
-        println("Enter the password :")
-        val password = readLine()!!
+        var password : String
+        while (true) {
+            println("Enter the password :")
+            password = readLine()!!
+            if (password.length>=4) break
+            else println("The password is too short")
+        }
         repository add Account(name, customerMailId, password,mobileNo)
         println("Account created Successfully ....!\nMail Id : $customerMailId \n Password : $password")
         logInView()

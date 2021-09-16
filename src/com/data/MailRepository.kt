@@ -31,14 +31,14 @@ abstract class MailRepository(val domainName: String) {
             val receiverRepository: MailRepository? = RepositoryDispatcher.getRepository(receiverMailId.domain)
 
             if (receiverRepository != null) {
-                receiverRepository receive receiverMail
+                receiverRepository.receive(receiverMail)
                 sender.addInMail(mail)
             }
 
         }
     }
 
-    private infix fun receive(receiverMail: Mail) {
+    private fun receive(receiverMail: Mail) {
         accounts[receiverMail.receiver.id]!!.addInMail(receiverMail)
     }
 
